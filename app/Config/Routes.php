@@ -29,7 +29,21 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->match(['get','post'],'/', 'Home::index',['filter'=>'noauth']);
+// $routes->match(['get','post'],'/', 'Home::test',['filter'=>'noauth']);
+$routes->get('/dashboard', 'Home::dashboard',['filter'=>'auth']);
+$routes->match(['get','post'],'/signup', 'Home::signup',['filter'=>'noauth']);
+$routes->get('/ViewData', 'ViewFeachData::ViewData',['filter'=>'auth']);
+$routes->get('/LogOut', 'Home::LogOut',['filter'=>'auth']);
+$routes->post('/Update', 'Update::update');
+$routes->get('/update/(:any)', 'SelectData::selectUserData/$1',['filter'=>'auth']);
+$routes->get('/delete/(:any)', 'Delete::delete/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'/addImage(:any)', 'UploadImage::UploadImage/$1',['filter'=>'auth']);
+
+
+
+
+
 
 /*
  * --------------------------------------------------------------------
