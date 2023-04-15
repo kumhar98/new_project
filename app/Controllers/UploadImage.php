@@ -15,11 +15,7 @@ class UploadImage extends BaseController
     // }
 
     public function UploadImage($id)
-    
-    {
-        echo $id;
-        return view('addImage');
-        exit();
+    { 
         $data =[];
         helper('form');
         $validationRule = [
@@ -34,28 +30,31 @@ class UploadImage extends BaseController
                 ],
             ],
         ];
-        if (! $this->validate($validationRule)) {
+        if (!$this->validate($validationRule)) {
             $data = ['errors' => $this->validator->getErrors()];
              return view('addImage', $data);
+            
         }
-      
-        $img = $this->request->getFile('imageName');        
+        $img = $this->request->getFile('imageName');
+  
         if (! $img->hasMoved()) {
             $filepath = WRITEPATH . 'uploads/image' . $img->store();
             $data = ['uploaded_fileinfo' => new File($filepath)];
             $fileName = esc(  $data['uploaded_fileinfo']->getBasename());
             $imageData = [
                 'image'=>$fileName
+
             ];
             $modal = new AdmineModal();
+             $ata =$id;
             if ($modal->update($id,$imageData)) {
+                $data = ['Flash_message' => 'The file has already been moved.'];
                 return redirect()->to('ViewData');
             }
-
-           
+ 
         }
 
-        $data = ['errors' => 'The file has already been moved.'];
+        
 
          return view('addImage', $data);
     }

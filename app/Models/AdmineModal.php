@@ -13,7 +13,7 @@ class AdmineModal extends Model
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['name','lname', 'email','password','created_at','updated_at'];
+    protected $allowedFields = ['name','lname', 'email','password','created_at','updated_at','image'];
     protected function beforeInsert(array $data){
         $data = $this->passwordHash($data);
         $data['data']['created_at'] = date('Y-m-d H:i:s');

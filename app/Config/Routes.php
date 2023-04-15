@@ -38,9 +38,8 @@ $routes->get('/LogOut', 'Home::LogOut',['filter'=>'auth']);
 $routes->post('/Update', 'Update::update');
 $routes->get('/update/(:any)', 'SelectData::selectUserData/$1',['filter'=>'auth']);
 $routes->get('/delete/(:any)', 'Delete::delete/$1',['filter'=>'auth']);
-$routes->match(['get','post'],'/addImage(:any)', 'UploadImage::UploadImage/$1',['filter'=>'auth']);
-
-
+$routes->match(['get','post'],'/addImage/(:any)', 'UploadImage::UploadImage/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'/excel', 'Xl::excel',['filter'=>'auth']);
 
 
 
